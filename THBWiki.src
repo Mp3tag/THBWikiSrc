@@ -1,0 +1,148 @@
+# ###################################################################
+# Mp3tag (v2.40+) parsing for thwiki.cc Album API by Arumi 2016
+#
+# Search by ALBUM
+#
+# API Documents http://thwiki.cc/albumapi
+# 
+# This file should be in your sources directory
+# On Windows XP it's 
+# C:\Documents and Settings\*username*\Application Data\Mp3tag\data\sources
+# On Windows 7+ it's 
+# C:\Users\*username*\AppData\Roaming\Mp3tag\data\sources
+# or just enter
+# %appdata%\Mp3tag\data\sources
+#	v0.1
+# http://help.mp3tag.de/main_online.html
+#
+# ###################################################################
+
+[Name]=THBWiki Album API
+[BasedOn]=thwiki.cc
+[IndexUrl]=http://thwiki.cc/album.php?m=0&g=2&o=1&d=tn&l=10&v=%s
+[AlbumUrl]=http://thwiki.cc/album.php?m=2&g=2&o=1&d=tp&s=/&f=alname+circle+event+year+official+coverurl&p=name+discno+trackno+time+artist+ogmusic&a=
+[WordSeperator]=%20
+[IndexFormat]=%_url%|%Album%|%Artist%
+[SearchBy]=%album%
+[UserAgent]=1
+[Encoding]=url-utf-8
+[ParserScriptIndex]=...
+# ###################################################################
+#					I  N  D  E  X
+# ###################################################################
+FindLine "*"
+MoveLine 1
+do 
+	Replace "|" "$verticalBar()"
+	Replace "\t" "|"
+	MoveChar 1
+	SayRest
+	SayNewline
+	MoveLine 1
+While "\t" 20
+
+[ParserScriptAlbum]=...
+# ###################################################################
+#					A  L  B  U  M
+# ###################################################################
+
+FindLine "*"
+MoveLine 1
+
+# alname circle event year disc official coverurl
+
+# Album
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "Album"
+SayRest
+MoveLine 1
+
+# Album Artist
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "AlbumArtist"
+SayRest
+MoveLine 1
+
+# Event
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "Genre"
+SayRest
+MoveLine 1
+
+# Year
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "Year"
+SayRest
+MoveLine 1
+
+# Website
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "OFFICIAL WEBSITE"
+SayRest
+MoveLine 1
+
+# Cover
+Replace "|" "$verticalBar()"
+FindInLine "\t" 2
+outputto "coverurl"
+SayRest
+MoveLine 1
+
+# name+discno+trackno+time+vocal+dub+compose+arrange+ogmusic
+
+FindLine "*"
+MoveLine 2
+
+# Track Title
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "Title"
+SayRest
+MoveLine 1
+
+# Track Disc
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "Discnumber"
+SayRest
+MoveLine 1
+
+# Track No
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "Track"
+SayRest
+MoveLine 1
+
+# Track Length
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "_LENGTH"
+SayRest
+MoveLine 1
+
+# Track Artist
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "Artist"
+SayRest
+Say "|"
+MoveLine 1
+
+# Track Original
+Replace "|" "$verticalBar()"
+Replace "\t" "|"
+FindInLine "|" 2
+outputto "Comment"
+SayRest
+Say "|"
