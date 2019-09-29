@@ -19,7 +19,7 @@
 
 [Name]=THBWiki Album API
 [BasedOn]=thwiki.cc
-[IndexUrl]=http://thwiki.cc/album.php?m=0&g=2&o=1&d=tn&l=10&v=%s
+[IndexUrl]=http://thwiki.cc/album.php?m=0&g=2&o=1&d=tn&l=30&v=%s
 [AlbumUrl]=http://thwiki.cc/album.php?m=2&g=2&o=1&d=tp&s=/&f=alname+circle+year+coverurl&p=name+discno+trackno+artist+compose&a=
 [WordSeperator]=%20
 [IndexFormat]=%_url%|%Album%|%Artist%
